@@ -4,3 +4,4 @@ NotificationService/settings.py
 media/apps_data/*
 .idea/**/*
 .idea
+notifications/migrations
