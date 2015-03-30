@@ -1,0 +1,26 @@
+{% extends "notifications/base.html" %}
+
+{% block body %}
+
+    <div style="text-align: center; margin-top: 10%;">
+
+        {% if user.is_authenticated %}
+            <p>Вы уже вошли как <i><b>{{ user.get_full_name }}</b></i>.<br>
+            Вы можете <a href="{% url "logout" %}">выйти</a> или
+                     <a href="{% url "account" user.id %}">перейти на страницу вашего аккаунта</a></p>
+        {% else %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ login_form.as_p }}
+                <input type="submit" value="Войти">
+            </form>
+            Нет аккаунта? <a href="{% url "registration" %}">Зарегистрируйтесь</a>.
+        {% endif %}
+
+        <div style="margin-top: 5%">
+            <h2>Здравствуйте!</h2>
+            Вы находитесь на тестовой странице проекта.<br>
+        </div>
+    </div>
+
+{% endblock %}
