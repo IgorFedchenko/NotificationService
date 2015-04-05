@@ -1,7 +1,29 @@
 {% extends "notifications/base.html" %}
+{% load render_table from django_tables2 %}
 
 {% block body %}
 
+    <div style="text-align: center;">
+
+        <div>
+            <p>
+                Это Ваш личный кабинет. Здесь вы можете создавать мобильные приложения и управлять рассылками.
+            </p>
+        </div>
+
+        <div>
+            {% if applications_table.rows %}
+                {% render_table applications_table %}
+                <p><a href=" {% url "create_app" %}">Создать новое приложение</a></p>
+            {% else %}
+                <p>
+                    <i>У вас ещё нет мобильных приложений.
+                        Хотите <a href=" {% url "create_app" %}">создать</a> новое?</i>
+                </p>
+            {% endif %}
+            <p><a href="{% url "app_keys_manage" %}">Перейти к управлению ключами</a></p>
+        </div>
 
 
+    </div>
 {% endblock %}

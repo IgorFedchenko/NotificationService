@@ -1,0 +1,44 @@
+{% extends "notifications/base.html" %}
+{% load render_table from django_tables2 %}
+
+{% block head %}
+    <script type="application/javascript">
+        function delete_key(key_id){
+            if (confirm("Вы уверены, что хотите удалить ключ?")){
+                ajaxPost(location.href, {'delete_id': key_id}, function(){
+                    location.reload();
+                })
+            }
+        }
+    </script>
+    <style>
+    table.center{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div style="text-align: center">
+        {% if application_keys_table.rows %}
+            {% render_table application_keys_table %}
+        {% else %}
+            <p>
+                <i>У вас ещё ключей для публикации приложения.
+                    Зачем они нужны, читайте <a href="#">здесь</a>.</i>
+            </p>
+        {% endif %}
+    </div>
+
+    <div style="text-align: center">
+        <p><i>Все поля должны заполняться, используя цифры и латинские буквы, подчёркивание и дефис!</i></p>
+        <form method="POST">
+            {% csrf_token %}
+            <table border style="margin-left: auto; margin-right: auto">{{ create_app_key_form.as_table }}</table>
+            <p><input type="submit" value="Создать ключ"></p>
+        </form>
+    </div>
+
+{% endblock %}

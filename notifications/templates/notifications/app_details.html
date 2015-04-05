@@ -1,1 +1,33 @@
 {% extends "notifications/base.html" %}
+{% load render_table from django_tables2 %}
+
+{% block head %}
+    <script type="application/javascript">
+        function delete_theme(theme_id){
+            if (confirm("Вы уверены, что хотите удалить эту рассылку?")){
+                ajaxPost(location.href, {'delete_id': theme_id}, function(){
+                    location.reload();
+                })
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+
+    <div style="text-align: center">
+        {% if themes_table.rows %}
+            {% render_table themes_table %}
+        {% else %}
+            <p><i>У вас ещё нет ни одной рассылки, прикреплённной к этому приложению.</i></p>
+        {% endif %}
+    </div>
+
+    <div style="text-align: center">
+        <form method="POST">
+            {% csrf_token %}
+            {{ create_theme_form }}
+            <input type="submit" value="Создать рассылку">
+        </form>
+    </div>
+{% endblock %}

@@ -1,1 +1,43 @@
 {% extends "notifications/base.html" %}
+
+{% block head %}
+    <script type="application/javascript">
+        $(document).ready(function(){
+
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+
+    <div style="text-align: center; width: 60%; margin-left: 20%">
+
+        <div>
+            <p>
+                Вас приветствует <b>Менеджер Приложений</b><br>
+                Здесь вы можете создать новое мобильное приложение и подписать его собственным секретным ключом.
+                После этого вы сможете его скачать и выложить от своего имени в Google Play Market.
+            </p>
+        </div>
+
+        <table border>
+            <tr><th>Конструктор</th><th>Визуализация</th></tr>
+            <tr>
+                <td width="50%">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ create_application_form.as_p }}
+                        <p><i>
+                            (Примечание: если ключ не указан, будет собрана пробная версия.
+                            Подробнее читайте <a href="#">здесь</a>.
+                        </i></p>
+                        <p><a href="{% url "app_keys_manage" %}"><i>Перейти к управлению ключами</i></a></p>
+                        <input type="submit" value="Создать">
+                    </form>
+                </td>
+                <td><i>Здесь будет картинка</i></td>
+            </tr>
+
+        </table>
+    </div>
+{% endblock %}

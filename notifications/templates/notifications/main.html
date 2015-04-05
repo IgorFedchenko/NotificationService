@@ -7,7 +7,7 @@
         {% if user.is_authenticated %}
             <p>Вы уже вошли как <i><b>{{ user.get_full_name }}</b></i>.<br>
             Вы можете <a href="{% url "logout" %}">выйти</a> или
-                     <a href="{% url "account" user.id %}">перейти на страницу вашего аккаунта</a></p>
+                      <a href="{% url "account" user.id %}">перейти на страницу вашего аккаунта</a></p>
         {% else %}
             <form method="POST">
                 {% csrf_token %}

@@ -1,0 +1,21 @@
+{% extends "notifications/base.html" %}
+
+{% block head %}
+    <script type="application/javascript">
+        $(function(){
+            ajaxPost(location.href, function(file_hash){
+                //alert("Приложение готово к загрузке!");
+                window.location = location.href + '/' + file_hash;
+            })
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+<div id="text" style="text-align: center">
+    <p>
+        <i>Подождите, идёт сборка приложения. Это может занять некоторое время (~30 секунд)...<br>
+        По окончании сборки загрузка начнётся автоматически.</i>
+    </p>
+</div>
+{% endblock %}

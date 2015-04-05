@@ -1,1 +1,30 @@
 {% extends "notifications/base.html" %}
+{% load render_table from django_tables2 %}
+
+{% block head %}
+    <style>
+    table.center{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div style="text-align: center">
+        {% if messages_table.rows %}
+            {% render_table messages_table %}
+        {% else %}
+            <p><i>У вас пока нет отправленных сообщений в данной рассылке</i></p>
+        {% endif %}
+
+        <p></p>
+        <form method="POST">
+            {% csrf_token %}
+            <table border class="center">{{ create_message_form.as_table }}</table>
+            <p><input type="submit" value="Отправить сообщение"></p>
+        </form>
+
+    </div>
+{% endblock %}

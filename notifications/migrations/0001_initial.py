@@ -14,6 +14,24 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='AppKey',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('alias_name', models.CharField(max_length=20)),
+                ('key_password', models.CharField(max_length=30)),
+                ('full_name', models.CharField(max_length=40)),
+                ('org_unit', models.CharField(max_length=40)),
+                ('org_name', models.CharField(max_length=40)),
+                ('city', models.CharField(max_length=40)),
+                ('province', models.CharField(max_length=40)),
+                ('country_code', models.CharField(max_length=40, choices=[(b'RU', b'RU')])),
+                ('alias_password', models.CharField(max_length=30)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Message',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -29,8 +47,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=50)),
+                ('description', models.CharField(max_length=300)),
                 ('image', models.FileField(upload_to=notifications.models.get_mobile_app_data_path)),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('key', models.ForeignKey(related_name='applications', to='notifications.AppKey', null=True)),
+                ('user', models.ForeignKey(related_name='applications', to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
@@ -41,8 +61,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=50)),
-                ('apps', models.ManyToManyField(to='notifications.MobileApp')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('application', models.ForeignKey(related_name='themes', to='notifications.MobileApp')),
+                ('user', models.ForeignKey(related_name='themes', to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
@@ -51,7 +71,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='message',
             name='theme',
-            field=models.ForeignKey(to='notifications.Theme'),
+            field=models.ForeignKey(related_name='messages', to='notifications.Theme'),
             preserve_default=True,
         ),
     ]
