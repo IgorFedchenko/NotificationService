@@ -1,3 +1,4 @@
+# coding=utf-8
 from StringIO import StringIO
 import mimetypes
 import os
@@ -19,7 +20,13 @@ from notifications import forms, models, tables
 
 class Main(View):
 
+    def add_breadcrumbs(self, request):
+        request.breadcrumbs([
+            ("Главная", reverse("main")),
+        ])
+
     def get(self, request):
+        self.add_breadcrumbs(request)
         login_form = forms.LoginForm()
         return render(request, "notifications/main.html", { "login_form": login_form } )
 
@@ -40,11 +47,17 @@ def logout_view(request):
 
 class Registration(View):
 
+    def add_breadcrumbs(self, request):
+        request.breadcrumbs([
+            ("Главная", reverse("main")),
+            ("Регистрация", reverse("registration")),
+        ])
+
     def get(self, request):
+        self.add_breadcrumbs(request)
         if request.user.is_authenticated():
             return redirect(reverse("main"))
         registration_form = forms.RegistrationForm()
-        print render(request, "notifications/registration.html")
         return render(request, "notifications/registration.html", { "registration_form": registration_form } )
 
     def post(self, request):
@@ -62,20 +75,31 @@ class Registration(View):
         return render(request, "notifications/registration.html", { "registration_form": registration_form } )
 
 class Account(View):
+    def add_breadcrumbs(self, request):
+        request.breadcrumbs([
+            ("Главная", reverse("main")),
+            ("Личный кабинет", reverse("account", args=[request.user.id])),
+        ])
 
     @method_decorator(login_required)
     def get(self, request, pk):
-        if request.user.id != int(pk):
-            return redirect(reverse("main"))
+        self.add_breadcrumbs(request)
         applications_table = tables.ApplicationsTable(models.MobileApp.objects.filter(user=request.user))
         RequestConfig(request).configure(applications_table)
         return render(request, "notifications/account.html",
                       {"applications_table" : applications_table,})
 
 class CreateApplication(View):
+    def add_breadcrumbs(self, request):
+       request.breadcrumbs([
+           ("Главная", reverse("main")),
+           ("Личный кабинет", reverse("account", args=[request.user.id])),
+           ("Создание приложения", reverse("create_app")),
+       ])
 
     @method_decorator(login_required)
     def get(self, request):
+        self.add_breadcrumbs(request)
         create_application_form = forms.CreateApplicationForm()
         return render(request, "notifications/create_app.html", {"create_application_form" : create_application_form})
 
@@ -95,12 +119,19 @@ class CreateApplication(View):
         return render(request, "notifications/create_app.html", { "create_application_form": create_application_form} )
 
 class ApplicationKeysManage(View):
+
+    def add_breadcrumbs(self, request):
+       request.breadcrumbs([
+           ("Главная", reverse("main")),
+           ("Личный кабинет", reverse("account", args=[request.user.id])),
+           ("Управление ключами приложений", reverse("create_app")),
+       ])
+
     def get_keys_table(self, request):
         application_keys_table = tables.ApplicationKeysTable(models.AppKey.objects.filter(user=request.user))
         RequestConfig(request).configure(application_keys_table)
         return application_keys_table
 
-    #@method_decorator(ajax)
     @method_decorator(login_required)
     def post(self, request):
         if 'delete_id' in request.POST:
@@ -120,6 +151,7 @@ class ApplicationKeysManage(View):
 
     @method_decorator(login_required)
     def get(self, request):
+        self.add_breadcrumbs(request)
         application_keys_table = self.get_keys_table(request)
         create_app_key_form = forms.CreateApplicationKeyForm()
         return render(request, "notifications/app_keys_manage.html",
@@ -127,6 +159,14 @@ class ApplicationKeysManage(View):
                        "application_keys_table": application_keys_table,})
 
 class ApplicationDetails(View):
+
+    def add_breadcrumbs(self, request, pk):
+        app = models.MobileApp.objects.get(pk=pk)
+        request.breadcrumbs([
+            ("Главная", reverse("main")),
+            ("Личный кабинет", reverse("account", args=[request.user.id])),
+            (u"Приложение '%s'"%app.name, reverse("app_details", args=[pk])),
+        ])
 
     def get_themes_table(self, request, app_id):
         themes_table = tables.ThemesTable(models.Theme.objects.filter(user=request.user,
@@ -157,6 +197,7 @@ class ApplicationDetails(View):
 
     @method_decorator(login_required)
     def get(self, request, pk):
+        self.add_breadcrumbs(request, pk)
         create_theme_form = forms.CreateThemeForm()
         themes_table = self.get_themes_table(request, pk)
         return render(request, "notifications/app_details.html",
@@ -166,6 +207,15 @@ class ApplicationDetails(View):
                         })
 
 class ThemeDetails(View):
+    def add_breadcrumbs(self, request, pk):
+        theme = models.Theme.objects.get(pk=pk)
+        request.breadcrumbs([
+            ("Главная", reverse("main")),
+            ("Личный кабинет", reverse("account", args=[request.user.id])),
+            (u"Приложение '%s'"%theme.application.name, reverse("app_details", args=[theme.application.id])),
+            (u"Рассылка '%s'"%theme.name, reverse("theme_details", args=[pk])),
+        ])
+
     def get_messages_table(self, request, pk):
         messages_table = tables.MessagesTable(models.Message.objects.filter(theme=models.Theme.objects.get(pk=pk)))
         RequestConfig(request).configure(messages_table)
@@ -187,6 +237,7 @@ class ThemeDetails(View):
 
     @method_decorator(login_required)
     def get(self, request, pk):
+        self.add_breadcrumbs(request, pk)
         messages_table = self.get_messages_table(request, pk)
         create_message_form = forms.CreateMessageForm()
         return render(request, "notifications/theme_details.html",
