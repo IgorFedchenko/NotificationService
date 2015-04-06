@@ -31,6 +31,7 @@ class Main(View):
         return render(request, "notifications/main.html", { "login_form": login_form } )
 
     def post(self, request):
+        self.add_breadcrumbs(request)
         login_form = forms.LoginForm(request.POST)
         if login_form.is_valid():
             user = authenticate(username=login_form.cleaned_data["login"],
@@ -61,6 +62,7 @@ class Registration(View):
         return render(request, "notifications/registration.html", { "registration_form": registration_form } )
 
     def post(self, request):
+        self.add_breadcrumbs(request)
         registration_form = forms.RegistrationForm(request.POST)
         if registration_form.is_valid():
             username = registration_form.cleaned_data['login']
@@ -105,6 +107,7 @@ class CreateApplication(View):
 
     @method_decorator(login_required)
     def post(self, request):
+        self.add_breadcrumbs(request)
         create_application_form = forms.CreateApplicationForm(request.POST ,request.FILES)
         if create_application_form.is_valid():
             models.MobileApp.objects.create(
@@ -124,7 +127,7 @@ class ApplicationKeysManage(View):
        request.breadcrumbs([
            ("Главная", reverse("main")),
            ("Личный кабинет", reverse("account", args=[request.user.id])),
-           ("Управление ключами приложений", reverse("create_app")),
+           ("Управление ключами приложений", reverse("app_keys_manage")),
        ])
 
     def get_keys_table(self, request):
@@ -134,6 +137,7 @@ class ApplicationKeysManage(View):
 
     @method_decorator(login_required)
     def post(self, request):
+        self.add_breadcrumbs(request)
         if 'delete_id' in request.POST:
             app_key = get_object_or_404(models.AppKey, pk=request.POST.get('delete_id'))
             if app_key.user == request.user:
@@ -177,6 +181,7 @@ class ApplicationDetails(View):
     #@method_decorator(ajax)
     @method_decorator(login_required)
     def post(self, request, pk):
+        self.add_breadcrumbs(request)
         if 'delete_id' in request.POST:
             theme = get_object_or_404(models.Theme, pk=request.POST.get('delete_id'))
             if theme.user == request.user:
@@ -223,6 +228,7 @@ class ThemeDetails(View):
 
     @method_decorator(login_required)
     def post(self, request, pk):
+        self.add_breadcrumbs(request)
         messages_table = self.get_messages_table(request, pk)
         message = models.Message(theme=models.Theme.objects.get(pk=pk), creation_date=timezone.now())
         create_message_form = forms.CreateMessageForm(request.POST, instance=message)

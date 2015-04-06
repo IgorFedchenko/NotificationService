@@ -40,7 +40,6 @@ class CreateApplicationKeyForm(forms.ModelForm):
 
     class Meta:
         model = models.AppKey
-        #exclude = ("user",)
         fields = (
             "org_unit", "org_name", "city", "province", "country_code",
             "alias_name", "alias_password", "duplicate_alias_password",
@@ -72,10 +71,12 @@ class CreateApplicationKeyForm(forms.ModelForm):
         for field in cleaned_data:
             if field in ["country_code"]: continue
             RegexValidator("^[\da-zA-Z_-]+$", "Используйте только латинские буквы, подчёркивание и дефис!")(cleaned_data[field])
-        if cleaned_data["alias_password"] != cleaned_data["duplicate_alias_password"]:
-            raise ValidationError("Пароли для алиаса не совпадают!")
-        if cleaned_data["key_password"] != cleaned_data["duplicate_key_password"]:
-            raise ValidationError("Пароли для ключа не совпадают!")
+        if "alias_password" in cleaned_data and "duplicate_alias_password" in cleaned_data:
+            if cleaned_data["alias_password"] != cleaned_data["duplicate_alias_password"]:
+                raise ValidationError("Пароли для алиаса не совпадают!")
+        if "key_password" in cleaned_data and "duplicate_key_password" in cleaned_data:
+            if cleaned_data["key_password"] != cleaned_data["duplicate_key_password"]:
+                raise ValidationError("Пароли для ключа не совпадают!")
 
 class CreateThemeForm(forms.ModelForm):
     class Meta:
