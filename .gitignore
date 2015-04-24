@@ -1,8 +1,7 @@
 venv
-venv/**/*
 NotificationService/settings.py
 media/apps_data/*
-.idea/**/*
 .idea
-notifications/migrations*.pyc
-migrations/*
+**/migrations/*
+*.pyc
+.gradle
