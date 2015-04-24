@@ -1,6 +1,7 @@
 venv
 NotificationService/settings.py
 media/apps_data/*
+media/apps_to_download/*
 .idea
 **/migrations/*
 *.pyc
