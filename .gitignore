@@ -1,8 +1,8 @@
 venv
 NotificationService/settings.py
-**/apps_data/*
-**/apps_to_download/*
-**/app_keys/*
+#**/apps_data/*
+#**/apps_to_download/*
+#**/app_keys/*
 .idea
 **/migrations/*
 *.pyc
