@@ -5,3 +5,4 @@ media/apps_data/*
 .idea/**/*
 .idea
 notifications/migrations*.pyc
+migrations/*
