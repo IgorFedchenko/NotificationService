@@ -6,4 +6,4 @@ media/app_keys/*
 .idea
 **/migrations/*
 *.pyc
-.gradle
+.gradlelocal.properties
