@@ -352,6 +352,8 @@ class DownloadApplication(View):
                 os.path.join(app_directory, "app", "key")
             ))
             key.path = os.path.join(BASE_DIR, "media", "app_keys", "key_%i.keystore"%key.id)
+            if not os.path.exists(os.path.dirname(key.path)):
+                os.makedirs(os.path.dirname(key.path))
             shutil.copy(key_path, key.path)
             key.save()
 
@@ -400,6 +402,8 @@ class DownloadApplication(View):
         import shutil, hashlib
         path_to_apk = self.build_app(request.user, models.MobileApp.objects.get(pk=pk))
         hash = hashlib.md5(path_to_apk).hexdigest()
+        if not os.path.exists("media/apps_to_download"):
+            os.makedirs("media/apps_to_download")
         shutil.move(path_to_apk, "media/apps_to_download/%s"%hash)
         shutil.rmtree(os.path.join(BASE_DIR, "SampleApplications", pk))
         return hash
