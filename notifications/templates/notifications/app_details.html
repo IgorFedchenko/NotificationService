@@ -16,6 +16,18 @@
 {% block body %}
 
     <div style="text-align: center">
+        <p><i>Название приложения:</i> {{ application.name }}</p>
+        <p><i>Отписание приложения:</i> {{ application.description }}</p>
+        <p><i>Ключ подписи:</i>
+            {% if application.key %}
+                {{ application.key.alias_name }}
+            {% else %}
+                <i>Не прикреплён</i>
+            {% endif %}
+        </p>
+    </div>
+
+    <div style="text-align: center">
         {% if themes_table.rows %}
             {% render_table themes_table %}
         {% else %}
@@ -28,6 +40,15 @@
             {% csrf_token %}
             {{ create_theme_form }}
             <input type="submit" value="Создать рассылку">
+        </form>
+    </div>
+
+    <br><br>
+    <div style="text-align: center">
+        <form method="POST">
+            {% csrf_token %}
+            {{ change_app_key_form }}
+            <input type="submit" name="change_key_form_submit" value="Изменить">
         </form>
     </div>
 {% endblock %}

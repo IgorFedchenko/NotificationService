@@ -18,8 +18,9 @@ class AppKey(models.Model):
     city = models.CharField(max_length=40)
     province = models.CharField(max_length=40)
     country_code = models.CharField(max_length=40, choices=[("RU","RU")])
-    alias_password = models.CharField(max_length=30)
+    keystore_password = models.CharField(max_length=30)
     creation_date = models.DateTimeField(auto_now=True)
+    path = models.FilePathField(null=True, default=None)
 
     def __unicode__(self):
         return self.alias_name

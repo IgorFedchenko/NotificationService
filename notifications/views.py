@@ -2,6 +2,9 @@
 from StringIO import StringIO
 import mimetypes
 import os
+import subprocess
+import shutil
+
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -16,7 +19,12 @@ from django_tables2 import RequestConfig
 from django_ajax.mixin import AJAXMixin
 from django_ajax.decorators import ajax
 
+from NotificationService.settings import BASE_DIR
+
 from notifications import forms, models, tables
+
+import pexpect
+
 
 class Main(View):
 
@@ -102,13 +110,13 @@ class CreateApplication(View):
     @method_decorator(login_required)
     def get(self, request):
         self.add_breadcrumbs(request)
-        create_application_form = forms.CreateApplicationForm()
+        create_application_form = forms.CreateApplicationForm(user=request.user)
         return render(request, "notifications/create_app.html", {"create_application_form" : create_application_form})
 
     @method_decorator(login_required)
     def post(self, request):
         self.add_breadcrumbs(request)
-        create_application_form = forms.CreateApplicationForm(request.POST ,request.FILES)
+        create_application_form = forms.CreateApplicationForm(request.POST ,request.FILES, user=request.user)
         if create_application_form.is_valid():
             models.MobileApp.objects.create(
                 user = request.user,
@@ -178,15 +186,22 @@ class ApplicationDetails(View):
         RequestConfig(request).configure(themes_table)
         return themes_table
 
-    #@method_decorator(ajax)
     @method_decorator(login_required)
     def post(self, request, pk):
-        self.add_breadcrumbs(request)
+        self.add_breadcrumbs(request, pk)
         if 'delete_id' in request.POST:
             theme = get_object_or_404(models.Theme, pk=request.POST.get('delete_id'))
             if theme.user == request.user:
+                theme.messages.all().delete()
                 theme.delete()
             return HttpResponse()
+        elif 'change_key_form_submit' in request.POST:
+            change_key_form = forms.ChangeApplicationKeyForm(request.POST)
+            if change_key_form.is_valid():
+                app = models.MobileApp.objects.get(pk=pk)
+                app.key=change_key_form.cleaned_data["key"]
+                app.save()
+                return self.get(request, pk)
         theme = models.Theme(user=request.user, creation_date=timezone.now(),
                              application=models.MobileApp.objects.get(pk=pk))
         create_theme_form = forms.CreateThemeForm(request.POST, instance=theme)
@@ -203,15 +218,44 @@ class ApplicationDetails(View):
     @method_decorator(login_required)
     def get(self, request, pk):
         self.add_breadcrumbs(request, pk)
+        application = models.MobileApp.objects.get(pk=pk)
         create_theme_form = forms.CreateThemeForm()
         themes_table = self.get_themes_table(request, pk)
+        change_app_key_form = forms.ChangeApplicationKeyForm(user=request.user)
         return render(request, "notifications/app_details.html",
                         {
                             "create_theme_form": create_theme_form,
                             "themes_table": themes_table,
+                            "application": application,
+                            "change_app_key_form": change_app_key_form,
                         })
 
 class ThemeDetails(View):
+    def send_message(self, message):
+        import json, httplib
+        connection = httplib.HTTPSConnection('api.parse.com', 443)
+        connection.connect()
+        request = {
+            "where": {
+                "deviceType": "android",
+                "appID": "%i"%message.theme.application.id,
+            },
+            "data": {
+                "alert": message.text,
+                "title": message.theme.name,
+            }
+        }
+        if message.url is not None and len(message.url) > 0:
+            request["data"]["uri"] = message.url
+
+        connection.request('POST', '/1/push', json.dumps(request), {
+               "X-Parse-Application-Id": "DUMkDMglUrCy4hmjQtMbMwGN9bwhM5avgW9FQOgW",
+               "X-Parse-REST-API-Key": "um6O1RPz60XNlthGgtMRTOpA4C63kUuvJaCKxktO",
+               "Content-Type": "application/json"
+        })
+        result = json.loads(connection.getresponse().read())
+        return result
+
     def add_breadcrumbs(self, request, pk):
         theme = models.Theme.objects.get(pk=pk)
         request.breadcrumbs([
@@ -228,12 +272,13 @@ class ThemeDetails(View):
 
     @method_decorator(login_required)
     def post(self, request, pk):
-        self.add_breadcrumbs(request)
+        self.add_breadcrumbs(request, pk)
         messages_table = self.get_messages_table(request, pk)
         message = models.Message(theme=models.Theme.objects.get(pk=pk), creation_date=timezone.now())
         create_message_form = forms.CreateMessageForm(request.POST, instance=message)
         if create_message_form.is_valid():
-            create_message_form.save()
+            message = create_message_form.save()
+            self.send_message(message)
             return self.get(request, pk)
         return render(request, "notifications/theme_details.html",
             {
@@ -272,22 +317,97 @@ def delete_app_key(request, pk):
 
 class DownloadApplication(View):
 
-    def response_by_filepath(self, path):
-        filename = path.split('/')[-1]
+    def response_by_filepath(self, path, filename = None):
+        filename = filename if filename is not None else path.split('/')[-1]
         file = StringIO(open(path, "rb").read())
         mimetype = mimetypes.guess_type(os.path.basename(path))[0]
         response = HttpResponse(file, content_type='application/%s'%str(mimetype))
         response['Content-Disposition'] = 'attachment; filename="%s"'%filename
         return response
 
-    #@method_decorator(ajax)
+    def create_key(self, key, user, app_directory):
+        key_path = os.path.join(app_directory, "app", "key.keystore")
+        if (os.path.exists(key_path)):
+            os.remove(key_path)
+        if key.path is not None:
+            shutil.copy(key.path, key_path)
+        else:
+            with open(os.path.join(app_directory, "USER_DATA.txt"), "w+") as f:
+                f.write("\n".join([
+                    key.keystore_password,
+                    key.keystore_password,
+                    user.get_full_name(),
+                    key.org_unit,
+                    key.org_name,
+                    key.city,
+                    key.province,
+                    key.country_code,
+                    "y",
+                    key.key_password,
+                    key.key_password,
+                ]) + "\n")
+            os.system("{0} {2} alias < {1}".format(
+                os.path.join(app_directory, "create_keystore.sh"),
+                os.path.join(app_directory, "USER_DATA.txt"),
+                os.path.join(app_directory, "app", "key")
+            ))
+            key.path = os.path.join(BASE_DIR, "media", "app_keys", "key_%i.keystore"%key.id)
+            shutil.copy(key_path, key.path)
+            key.save()
+
+    def build_app(self, user, app):
+        #Copy application
+        template_directory = os.path.join(BASE_DIR, "SampleApplications", "NotificationApp")
+        app_directory = os.path.join(BASE_DIR, "SampleApplications", "%i"%app.id)
+        if (os.path.exists(app_directory)):
+            shutil.rmtree(app_directory)
+        shutil.copytree(template_directory, app_directory)
+
+        #Insert image to application
+        for root, dirs, files in os.walk(os.path.join(app_directory, "app/src/main/res/")):
+            if "launch_image.png" in files:
+                image_path = os.path.join(root, "launch_image.png")
+                os.remove(image_path)
+                shutil.copy(app.image.path, image_path)
+
+        #Insert appID to application source code
+        for root, dirs, files in os.walk(os.path.join(app_directory, "app", "src")):
+            if "ApplicationManager.java" in files:
+                file_path = os.path.join(root, "ApplicationManager.java")
+                with open(file_path) as f:
+                    data = f.read()
+                with open(file_path, "w") as f:
+                    f.write(data.replace("SOME_HASH", "%i"%app.id))
+                break
+
+        if app.key is not None:
+            self.create_key(app.key, user, app_directory)
+            mode = "Release"
+        else:
+            mode = "Debug"
+
+        build = pexpect.spawn(os.path.join(app_directory, "gradlew") + " assemble%s"%mode, cwd=app_directory)
+        if mode == "Release":
+            build.expect(".*Keystore password.*")
+            build.sendline(app.key.keystore_password)
+            build.expect(".*Key password.*")
+            build.sendline(app.key.key_password)
+            build.expect(pexpect.EOF)
+        return os.path.join(app_directory, "app", "build", "outputs", "apk", "app-%s.apk"%mode.lower())
+
     @method_decorator(login_required)
     def post(self, request, pk, hash):
-        return "hash4545sum"
+        import shutil, hashlib
+        path_to_apk = self.build_app(request.user, models.MobileApp.objects.get(pk=pk))
+        hash = hashlib.md5(path_to_apk).hexdigest()
+        shutil.move(path_to_apk, "media/apps_to_download/%s"%hash)
+        shutil.rmtree(os.path.join(BASE_DIR, "SampleApplications", pk))
+        return hash
 
     @method_decorator(login_required)
     def get(self, request, pk, hash = None):
         if hash is not None:
-            link = "media/file.bin"
-            return self.response_by_filepath(link)
+            link = "media/apps_to_download/%s"%hash
+            mode = "release" if models.MobileApp.objects.get(pk=pk).key is not None else "debug"
+            return self.response_by_filepath(link, "application-{0}.apk".format(mode))
         return render(request, "notifications/download_app.html")
