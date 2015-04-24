@@ -19,7 +19,7 @@ from django_tables2 import RequestConfig
 from django_ajax.mixin import AJAXMixin
 from django_ajax.decorators import ajax
 
-from NotificationService.settings import BASE_DIR
+from NotificationService.settings import BASE_DIR, MEDIA_URL
 
 from notifications import forms, models, tables
 
@@ -402,9 +402,9 @@ class DownloadApplication(View):
         import shutil, hashlib
         path_to_apk = self.build_app(request.user, models.MobileApp.objects.get(pk=pk))
         hash = hashlib.md5(path_to_apk).hexdigest()
-        if not os.path.exists("media/apps_to_download"):
+        if not os.path.exists(os.path.join(MEDIA_URL, "media/apps_to_download")):
             os.makedirs("media/apps_to_download")
-        shutil.move(path_to_apk, "media/apps_to_download/%s"%hash)
+        shutil.move(path_to_apk, os.path.join(MEDIA_URL, "media/apps_to_download/%s"%hash))
         shutil.rmtree(os.path.join(BASE_DIR, "SampleApplications", pk))
         return hash
 
