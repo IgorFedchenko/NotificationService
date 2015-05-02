@@ -358,7 +358,7 @@ class DownloadApplication(View):
             key.save()
 
     def write_to_log(self, text):
-        with open("log_file.txt", "a") as f: f.write(text + "\n")
+        with open(os.path.join(BASE_DIR, "log_file.txt"), "a") as f: f.write(text + "\n")
 
     def build_app(self, user, app):
         #Copy application
