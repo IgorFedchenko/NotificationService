@@ -393,7 +393,7 @@ class DownloadApplication(View):
         else:
             mode = "Debug"
 
-        self.write_to_log("Building... Cwd: %s"%app_directory)
+        self.write_to_log("Building... Cwd: %s"%app_directoryc)
         build = pexpect.spawn(os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
                               cwd=app_directory, env = {"JAVA_HOME": "/bin/java"})
         if mode == "Release":

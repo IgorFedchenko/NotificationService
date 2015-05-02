@@ -1,0 +1,1 @@
+gradlew assemble"$1"
