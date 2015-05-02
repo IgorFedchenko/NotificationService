@@ -357,6 +357,9 @@ class DownloadApplication(View):
             shutil.copy(key_path, key.path)
             key.save()
 
+    def write_to_log(self, text):
+        with open("log_file.txt", "a") as f: f.write(text + "\n")
+
     def build_app(self, user, app):
         #Copy application
         template_directory = os.path.join(BASE_DIR, "SampleApplications", "NotificationApp")
@@ -366,6 +369,7 @@ class DownloadApplication(View):
         shutil.copytree(template_directory, app_directory)
 
         #Insert image to application
+        self.write_to_log("Inserting image...")
         for root, dirs, files in os.walk(os.path.join(app_directory, "app/src/main/res/")):
             if "launch_image.png" in files:
                 image_path = os.path.join(root, "launch_image.png")
@@ -373,6 +377,7 @@ class DownloadApplication(View):
                 shutil.copy(app.image.path, image_path)
 
         #Insert appID to application source code
+        self.write_to_log("Inserting application ID")
         for root, dirs, files in os.walk(os.path.join(app_directory, "app", "src")):
             if "ApplicationManager.java" in files:
                 file_path = os.path.join(root, "ApplicationManager.java")
@@ -388,13 +393,15 @@ class DownloadApplication(View):
         else:
             mode = "Debug"
 
+        self.write_to_log("Building...")
         build = pexpect.spawn(os.path.join(app_directory, "gradlew") + " assemble%s"%mode, cwd=app_directory)
         if mode == "Release":
             build.expect(".*Keystore password.*")
             build.sendline(app.key.keystore_password)
             build.expect(".*Key password.*")
             build.sendline(app.key.key_password)
-            build.expect(pexpect.EOF)
+        build.expect(pexpect.EOF)
+        self.write_to_log("Build finished!")
         return os.path.join(app_directory, "app", "build", "outputs", "apk", "app-%s.apk"%mode.lower())
 
     @method_decorator(login_required)
@@ -403,7 +410,7 @@ class DownloadApplication(View):
         path_to_apk = self.build_app(request.user, models.MobileApp.objects.get(pk=pk))
         hash = hashlib.md5(path_to_apk).hexdigest()
         if not os.path.exists(os.path.join(MEDIA_ROOT, "media/apps_to_download")):
-            os.makedirs("media/apps_to_download")
+            os.makedirs(os.path.join(MEDIA_ROOT, "media/apps_to_download"))
         shutil.move(path_to_apk, os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash))
         shutil.rmtree(os.path.join(BASE_DIR, "SampleApplications", pk))
         return hash
@@ -411,7 +418,7 @@ class DownloadApplication(View):
     @method_decorator(login_required)
     def get(self, request, pk, hash = None):
         if hash is not None:
-            link = "media/apps_to_download/%s"%hash
+            link = os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash)
             mode = "release" if models.MobileApp.objects.get(pk=pk).key is not None else "debug"
             return self.response_by_filepath(link, "application-{0}.apk".format(mode))
         return render(request, "notifications/download_app.html")
