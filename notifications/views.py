@@ -401,7 +401,7 @@ class DownloadApplication(View):
             build.expect(".*Key password.*")
             build.sendline(app.key.key_password)
         build.expect(pexpect.EOF)
-        self.write_to_log(build.before + "\n" + build.after)
+        self.write_to_log(str(build.before) + "\n" + str(build.after))
         self.write_to_log("Build finished!")
         return os.path.join(app_directory, "app", "build", "outputs", "apk", "app-%s.apk"%mode.lower())
 
