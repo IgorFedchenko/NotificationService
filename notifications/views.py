@@ -399,11 +399,11 @@ class DownloadApplication(View):
         build = pexpect.spawn(os.path.join(app_directory, "build.sh") + " " + mode,
                               cwd=app_directory, env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"})
         if mode == "Release":
-            build.expect(".*Keystore password.*")
+            build.expect(".*Keystore password.*", timeout=120)
             build.sendline(app.key.keystore_password)
             build.expect(".*Key password.*")
             build.sendline(app.key.key_password)
-        build.expect(pexpect.EOF)
+        build.expect(pexpect.EOF, timeout=120)
         self.write_to_log(str(build.before) + "\n" + str(build.after))
         self.write_to_log("Build finished!")
         return os.path.join(app_directory, "app", "build", "outputs", "apk", "app-%s.apk"%mode.lower())
