@@ -415,7 +415,8 @@ class DownloadApplication(View):
                           events={
                               ".*Keystore password.*": app.key.keystore_password if app.key is not None else "",
                               ".*Key password.*": app.key.key_password if app.key is not None else ""
-                          })
+                          },
+                          env={"TERM": "-dumb"})
         logging.info(out)
         logging.info("Build finished!")
         return os.path.join(app_directory, "app", "build", "outputs", "apk", "app-%s.apk"%mode.lower())
