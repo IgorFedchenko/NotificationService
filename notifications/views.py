@@ -410,12 +410,12 @@ class DownloadApplication(View):
         # build.expect(pexpect.EOF, timeout=120)
         #logging.info(str(build.before) + "\n" + str(build.after))
 
-        out = pexpect.run("python", [
+        out = pexpect.run("python " + " ".join([
                                    os.path.join(app_directory, "build.py"),
                                    os.path.join(app_directory, "gradlew"),
                                    mode,
                                    app_directory
-                               ],
+                                ]),
                            cwd=app_directory, env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"}
                           )
         logging.info(out)
