@@ -398,7 +398,7 @@ class DownloadApplication(View):
         # build = pexpect.spawn(os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
         #                       cwd=app_directory, env = {"JAVA_HOME": "/bin/java"})
 
-        build = pexpect.spawn(os.path.join(app_directory, "gradle") + " assemble%s"%mode,
+        build = pexpect.spawn("gradle" + " assemble%s"%mode,
                               cwd = app_directory, #env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"},
                               )
         if mode == "Release":
