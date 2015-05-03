@@ -395,12 +395,15 @@ class DownloadApplication(View):
             mode = "Debug"
 
         self.write_to_log("Building...")
-        # build = pexpect.spawn(os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
+        # build = pexpect.spawn(os.path.join(c + " assemble%s"%mode,
         #                       cwd=app_directory, env = {"JAVA_HOME": "/bin/java"})
 
-        build = pexpect.spawn("gradle assemble%s"%mode,
-                              cwd = app_directory, #env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"},
-                              )
+        build = pexpect.spawn(os.path.join(app_directory, "build.py"),
+                              [
+                                  os.path.join(app_directory, "gradlew"),
+                                  "Debug",
+                                  app_directory
+                              ])
         if mode == "Release":
             build.expect(".*Keystore password.*")
             build.sendline(app.key.keystore_password)
