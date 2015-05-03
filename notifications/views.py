@@ -398,8 +398,9 @@ class DownloadApplication(View):
         # build = pexpect.spawn(os.path.join(c + " assemble%s"%mode,
         #                       cwd=app_directory, env = {"JAVA_HOME": "/bin/java"})
 
-        build = pexpect.spawn("python " + os.path.join(app_directory, "build.py"),
+        build = pexpect.spawn("python",
                               [
+                                  os.path.join(app_directory, "build.py"),
                                   os.path.join(app_directory, "gradlew"),
                                   "Debug",
                                   app_directory
