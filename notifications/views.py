@@ -414,7 +414,7 @@ class DownloadApplication(View):
         # try:
         #     logging.info("<<<" + out + ">>>")
         # except: pass
-        os.system("{0} {2}".format(
+        os.system("{0} {1}".format(
                 os.path.join(app_directory, "build.sh"),
                 mode)
         )
