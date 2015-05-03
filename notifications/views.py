@@ -397,16 +397,17 @@ class DownloadApplication(View):
         self.write_to_log("Building...")
         # build = pexpect.spawn(os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
         #                       cwd=app_directory, env = {"JAVA_HOME": "/bin/java"})
-        # build = pexpect.spawn(os.path.join(app_directory, "build.sh") + " " + mode,
-        #                       cwd=app_directory, env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"},
-        #                       )
-        # if mode == "Release":
-        #     build.expect(".*Keystore password.*")
-        #     build.sendline(app.key.keystore_password)
-        #     build.expect(".*Key password.*")
-        #     build.sendline(app.key.key_password)
-        # build.expect(pexpect.EOF)
-        # self.write_to_log(str(build.before) + "\n" + str(build.after))
+
+        build = pexpect.spawn(os.path.join(app_directory, "build.sh") + " " + mode,
+                              cwd=app_directory, env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"},
+                              )
+        if mode == "Release":
+            build.expect(".*Keystore password.*")
+            build.sendline(app.key.keystore_password)
+            build.expect(".*Key password.*")
+            build.sendline(app.key.key_password)
+        build.expect(pexpect.EOF)
+        logging.info(str(build.before) + "\n" + str(build.after))
 
         # out = pexpect.run(os.path.join(app_directory, "build.sh") + " " + mode,
         #                   cwd=app_directory, env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"}
@@ -414,11 +415,11 @@ class DownloadApplication(View):
         # try:
         #     logging.info("<<<" + out + ">>>")
         # except: pass
-        os.system("{0} {1}".format(
-                os.path.join(app_directory, "build.sh"),
-                mode)
-        )
-        #self.write_to_log(out)
+
+        # os.system("{0} {1}".format(
+        #         os.path.join(app_directory, "build.sh"),
+        #         mode)
+        # )
         self.write_to_log("Build finished!")
         return os.path.join(app_directory, "app", "build", "outputs", "apk", "app-%s.apk"%mode.lower())
 
