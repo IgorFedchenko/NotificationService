@@ -358,9 +358,6 @@ class DownloadApplication(View):
             shutil.copy(key_path, key.path)
             key.save()
 
-    def write_to_log(self, text):
-        with open(os.path.join(BASE_DIR, "log_file.txt"), "a") as f: f.write(text + "\n")
-
     def build_app(self, user, app):
         #Copy application
         template_directory = os.path.join(BASE_DIR, "SampleApplications", "NotificationApp")
@@ -370,7 +367,7 @@ class DownloadApplication(View):
         shutil.copytree(template_directory, app_directory)
 
         #Insert image to application
-        self.write_to_log("Inserting image...")
+        logging.info("Inserting image...")
         for root, dirs, files in os.walk(os.path.join(app_directory, "app/src/main/res/")):
             if "launch_image.png" in files:
                 image_path = os.path.join(root, "launch_image.png")
@@ -378,7 +375,7 @@ class DownloadApplication(View):
                 shutil.copy(app.image.path, image_path)
 
         #Insert appID to application source code
-        self.write_to_log("Inserting application ID")
+        logging.info("Inserting application ID")
         for root, dirs, files in os.walk(os.path.join(app_directory, "app", "src")):
             if "ApplicationManager.java" in files:
                 file_path = os.path.join(root, "ApplicationManager.java")
@@ -394,26 +391,29 @@ class DownloadApplication(View):
         else:
             mode = "Debug"
 
-        self.write_to_log("Building...")
+        logging.info("Building...")
         # build = pexpect.spawn(os.path.join(c + " assemble%s"%mode,
         #                       cwd=app_directory, env = {"JAVA_HOME": "/bin/java"})
 
-        build = pexpect.spawn("python",
-                              [
-                                  os.path.join(app_directory, "build.py"),
-                                  os.path.join(app_directory, "gradlew"),
-                                  "Debug",
-                                  app_directory
-                              ])
-        if mode == "Release":
-            build.expect(".*Keystore password.*")
-            build.sendline(app.key.keystore_password)
-            build.expect(".*Key password.*")
-            build.sendline(app.key.key_password)
-        build.expect(pexpect.EOF, timeout=120)
-        #while build.isalive(): pass
-        logging.info(str(build.before) + "\n" + str(build.after))
+        # build = pexpect.spawn("python",
+        #                       [
+        #                           os.path.join(app_directory, "build.py"),
+        #                           os.path.join(app_directory, "gradlew"),
+        #                           "Debug",
+        #                           app_directory
+        #                       ])
+        # if mode == "Release":
+        #     build.expect(".*Keystore password.*")
+        #     build.sendline(app.key.keystore_password)
+        #     build.expect(".*Key password.*")
+        #     build.sendline(app.key.key_password)
+        # build.expect(pexpect.EOF, timeout=120)
+        #logging.info(str(build.before) + "\n" + str(build.after))
 
+        out = pexpect.run("python", [os.path.join(app_directory, "build.sh") + " " + mode],
+                           cwd=app_directory, env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"}
+                          )
+        logging.info(out)
         # out = pexpect.run(os.path.join(app_directory, "build.sh") + " " + mode,
         #                   cwd=app_directory, env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"}
         #                  )
@@ -425,7 +425,7 @@ class DownloadApplication(View):
         #         os.path.join(app_directory, "build.sh"),
         #         mode)
         # )
-        self.write_to_log("Build finished!")
+        logging.info("Build finished!")
         return os.path.join(app_directory, "app", "build", "outputs", "apk", "app-%s.apk"%mode.lower())
 
     @method_decorator(login_required)
