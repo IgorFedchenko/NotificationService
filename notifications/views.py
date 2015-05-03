@@ -406,7 +406,7 @@ class DownloadApplication(View):
             build.sendline(app.key.keystore_password)
             build.expect(".*Key password.*")
             build.sendline(app.key.key_password)
-        build.expect(pexpect.EOF)
+        build.expect(pexpect.EOF, timeout=None)
         logging.info(str(build.before) + "\n" + str(build.after))
 
         # out = pexpect.run(os.path.join(app_directory, "build.sh") + " " + mode,
