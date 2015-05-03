@@ -407,13 +407,17 @@ class DownloadApplication(View):
         #     build.sendline(app.key.key_password)
         # build.expect(pexpect.EOF)
         # self.write_to_log(str(build.before) + "\n" + str(build.after))
-        # self.write_to_log("Build finished!")
-        out = pexpect.run(os.path.join(app_directory, "build.sh") + " " + mode,
-                          cwd=app_directory, env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"}
-                         )
-        try:
-            logging.info("<<<" + out + ">>>")
-        except: pass
+
+        # out = pexpect.run(os.path.join(app_directory, "build.sh") + " " + mode,
+        #                   cwd=app_directory, env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"}
+        #                  )
+        # try:
+        #     logging.info("<<<" + out + ">>>")
+        # except: pass
+        os.system("{0} {2}".format(
+                os.path.join(app_directory, "build.sh"),
+                mode)
+        )
         #self.write_to_log(out)
         self.write_to_log("Build finished!")
         return os.path.join(app_directory, "app", "build", "outputs", "apk", "app-%s.apk"%mode.lower())
