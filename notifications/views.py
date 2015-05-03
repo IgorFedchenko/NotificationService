@@ -4,6 +4,7 @@ import mimetypes
 import os
 import subprocess
 import shutil
+import logging
 
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -410,7 +411,7 @@ class DownloadApplication(View):
         out = pexpect.run(os.path.join(app_directory, "build.sh") + " " + mode,
                           cwd=app_directory, env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"}
                          )
-        print out
+        logging.info(out)
         #self.write_to_log(out)
         self.write_to_log("Build finished!")
         return os.path.join(app_directory, "app", "build", "outputs", "apk", "app-%s.apk"%mode.lower())
