@@ -400,7 +400,7 @@ class DownloadApplication(View):
 
         f = open(os.path.join(BASE_DIR, "buildLog.txt"), "w")
         build = pexpect.spawn(os.path.join(app_directory, "build.sh") + " " + mode,
-                              cwd = app_directory, env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"},
+                              cwd = app_directory, #env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"},
                               logfile = f
                               )
         if mode == "Release":
