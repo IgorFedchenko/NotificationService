@@ -409,7 +409,7 @@ class DownloadApplication(View):
             build.expect(".*Key password.*")
             build.sendline(app.key.key_password)
         #build.expect(pexpect.EOF, timeout=120)
-        build.wait()
+        while build.isalive(): pass
         logging.info(str(build.before) + "\n" + str(build.after))
         f.close()
 
