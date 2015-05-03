@@ -1,1 +1,1 @@
-./gradlew assemble"$1"
+gradle assemble"$1"
