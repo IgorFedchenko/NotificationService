@@ -399,7 +399,7 @@ class DownloadApplication(View):
         #                       cwd=app_directory, env = {"JAVA_HOME": "/bin/java"})
 
         f = open(os.path.join(BASE_DIR, "buildLog.txt"), "w")
-        build = pexpect.spawn(os.path.join(app_directory, "build.sh") + " " + mode,
+        build = pexpect.spawn(os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
                               cwd = app_directory, #env = {"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"},
                               logfile = f
                               )
