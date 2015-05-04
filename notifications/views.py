@@ -393,39 +393,11 @@ class DownloadApplication(View):
             mode = "Debug"
 
         logging.info("Building...")
-        # build = pexpect.spawn(os.path.join(c + " assemble%s"%mode,
-        #                       cwd=app_directory, env = {"JAVA_HOME": "/bin/java"})
-
-        # build = pexpect.spawn("python",
-        #                       [
-        #                           os.path.join(app_directory, "build.py"),
-        #                           os.path.join(app_directory, "gradlew"),
-        #                           "Debug",
-        #                           app_directory
-        #                       ])
-        # if mode == "Release":
-        #     build.expect(".*Keystore password.*")
-        #     build.sendline(app.key.keystore_password)
-        #     build.expect(".*Key password.*")
-        #     build.sendline(app.key.key_password)
-        # build.expect(pexpect.EOF, timeout=120)
-        #logging.info(str(build.before) + "\n" + str(build.after))
-
-        # build = pexpect.spawn(os.path.join(app_directory, "build.sh") +
-        #                       app_directory +
-        #                       os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
-        #                       cwd=app_directory)
-        # if mode == "Release":
-        #     build.expect(".*Keystore password.*")
-        #     build.sendline(app.key.keystore_password)
-        #     build.expect(".*Key password.*")
-        #     build.sendline(app.key.key_password)
-        #     #build.expect(pexpect.EOF, timeout=120)
-        #     logging.info(str(build.before) + "\n" + str(build.after))
-        # sleep(120)
         try:
             out = subprocess.check_output(os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
                                           cwd=app_directory,
+                                          stdin=None if mode == "Debug" else
+                                                StringIO(app.key.keystore_password+"\n"+app.key.key_password),
                                           shell=True,
                                           env={"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"})
         except subprocess.CalledProcessError as ex:
