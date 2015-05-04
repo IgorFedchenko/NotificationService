@@ -398,10 +398,9 @@ class DownloadApplication(View):
             file_path = os.path.join(app_directory, "app", "build.gradle")
             with open(file_path) as f:
                 data = f.read()
-
             with open(file_path, "w") as f:
-                f.write(data.replace(r'new String(System.console().readPassword("Keystore password: "))', "\"%s\""%app.key.keystore_password)
-                            .replace(r'new String(System.console().readPassword("Key password: "))', "\"%s\""%app.key.key_password))
+                f.write(data.replace('new String(System.console().readPassword("Keystore password: "))', '"{0}"'.format(app.key.keystore_password))
+                            .replace('new String(System.console().readPassword("Key password: "))', '"{0}"'.format(app.key.key_password)))
 
         logging.info("Building...")
         try:
