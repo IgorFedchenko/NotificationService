@@ -6,6 +6,7 @@ import os
 import subprocess
 import shutil
 import logging
+import re
 
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -392,12 +393,20 @@ class DownloadApplication(View):
         else:
             mode = "Debug"
 
+        #If Release: Insert building keys
+        if mode == "Release":
+            file_path = os.path.join(app_directory, "app", "build.gradle")
+            with open(file_path) as f:
+                data = f.read()
+
+            with open(file_path, "w") as f:
+                f.write(data.replace(r'new String(System.console().readPassword("Keystore password: "))', "\"%s\""%app.key.keystore_password)
+                            .replace(r'new String(System.console().readPassword("Key password: "))', "\"%s\""%app.key.key_password))
+
         logging.info("Building...")
         try:
             out = subprocess.check_output(os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
                                           cwd=app_directory,
-                                          stdin=None if mode == "Debug" else
-                                                StringIO(app.key.keystore_password+"\n"+app.key.key_password),
                                           shell=True,
                                           env={"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71/"})
         except subprocess.CalledProcessError as ex:
