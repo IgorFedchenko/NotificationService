@@ -411,17 +411,26 @@ class DownloadApplication(View):
         # build.expect(pexpect.EOF, timeout=120)
         #logging.info(str(build.before) + "\n" + str(build.after))
 
-        build = pexpect.spawn(os.path.join(app_directory, "build.sh") +
-                              os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
-                              cwd=app_directory)
-        if mode == "Release":
-            build.expect(".*Keystore password.*")
-            build.sendline(app.key.keystore_password)
-            build.expect(".*Key password.*")
-            build.sendline(app.key.key_password)
-            #build.expect(pexpect.EOF, timeout=120)
-            logging.info(str(build.before) + "\n" + str(build.after))
-        sleep(120)
+        # build = pexpect.spawn(os.path.join(app_directory, "build.sh") +
+        #                       app_directory +
+        #                       os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
+        #                       cwd=app_directory)
+        # if mode == "Release":
+        #     build.expect(".*Keystore password.*")
+        #     build.sendline(app.key.keystore_password)
+        #     build.expect(".*Key password.*")
+        #     build.sendline(app.key.key_password)
+        #     #build.expect(pexpect.EOF, timeout=120)
+        #     logging.info(str(build.before) + "\n" + str(build.after))
+        # sleep(120)
+        try:
+            out = subprocess.check_output(os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
+                                          cwd=app_directory,
+                                          shell=True)
+        except subprocess.CalledProcessError as ex:
+            logging.info(ex.returncode)
+        else:
+            logging.info(out)
         logging.info("Build finished!")
         return os.path.join(app_directory, "app", "build", "outputs", "apk", "app-%s.apk"%mode.lower())
 
