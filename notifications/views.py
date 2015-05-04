@@ -158,7 +158,7 @@ class ApplicationKeysManage(View):
         create_app_key_form = forms.CreateApplicationKeyForm(request.POST, instance=app_key)
         if create_app_key_form.is_valid():
             create_app_key_form.save()
-            create_app_key_form = forms.CreateApplicationKeyForm()
+            return self.get(request)
         return render(request, "notifications/app_keys_manage.html",
                       {"create_app_key_form": create_app_key_form,
                        "application_keys_table": application_keys_table,})
