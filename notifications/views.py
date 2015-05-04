@@ -410,13 +410,16 @@ class DownloadApplication(View):
         # build.expect(pexpect.EOF, timeout=120)
         #logging.info(str(build.before) + "\n" + str(build.after))
 
-        out = pexpect.run(os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
+        out = pexpect.run("python " + " ".join([
+                                os.path.join(app_directory, "build.py"),
+                                os.path.join(app_directory, "gradlew"),
+                                mode,
+                                app_directory]),
                           cwd=app_directory,
                           events={
                               ".*Keystore password.*": app.key.keystore_password if app.key is not None else "",
                               ".*Key password.*": app.key.key_password if app.key is not None else ""
-                          },
-                          env={"TERM": "-dumb"})
+                          })
         logging.info(out)
         logging.info("Build finished!")
         return os.path.join(app_directory, "app", "build", "outputs", "apk", "app-%s.apk"%mode.lower())
