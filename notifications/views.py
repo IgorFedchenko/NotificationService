@@ -416,12 +416,12 @@ class DownloadApplication(View):
                                 mode]),
                           cwd=app_directory)
         if mode == "Release":
-             build.expect(".*Keystore password.*")
-             build.sendline(app.key.keystore_password)
-             build.expect(".*Key password.*")
-             build.sendline(app.key.key_password)
-        build.expect(pexpect.EOF, timeout=120)
-        logging.info(str(build.before) + "\n" + str(build.after))
+            build.expect(".*Keystore password.*")
+            build.sendline(app.key.keystore_password)
+            build.expect(".*Key password.*")
+            build.sendline(app.key.key_password)
+            build.expect(pexpect.EOF, timeout=120)
+            logging.info(str(build.before) + "\n" + str(build.after))
         logging.info("Build finished!")
         return os.path.join(app_directory, "app", "build", "outputs", "apk", "app-%s.apk"%mode.lower())
 
