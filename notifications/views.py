@@ -1,6 +1,7 @@
 # coding=utf-8
 from StringIO import StringIO
 import mimetypes
+from time import sleep
 import os
 import subprocess
 import shutil
@@ -419,7 +420,7 @@ class DownloadApplication(View):
             build.sendline(app.key.key_password)
             #build.expect(pexpect.EOF, timeout=120)
             logging.info(str(build.before) + "\n" + str(build.after))
-        while build.isalive(): pass
+        sleep(120)
         logging.info("Build finished!")
         return os.path.join(app_directory, "app", "build", "outputs", "apk", "app-%s.apk"%mode.lower())
 
