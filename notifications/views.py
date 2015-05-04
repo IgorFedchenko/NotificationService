@@ -428,7 +428,7 @@ class DownloadApplication(View):
                                           cwd=app_directory,
                                           shell=True)
         except subprocess.CalledProcessError as ex:
-            logging.info("Ret code:" + ex.returncode + "\nOutput: " + ex.output)
+            logging.info("Ret code:" + str(ex.returncode) + "\nOutput: " + ex.output)
         else:
             logging.info(out)
         logging.info("Build finished!")
