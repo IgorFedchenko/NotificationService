@@ -426,7 +426,8 @@ class DownloadApplication(View):
         try:
             out = subprocess.check_output(os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
                                           cwd=app_directory,
-                                          shell=True)
+                                          shell=True,
+                                          env={"JAVA_HOME": "/home/igor/soft/jdk1.7.0_71"})
         except subprocess.CalledProcessError as ex:
             logging.info("Ret code:" + str(ex.returncode) + "\nOutput: " + ex.output)
         else:
