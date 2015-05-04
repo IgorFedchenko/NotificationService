@@ -411,7 +411,8 @@ class DownloadApplication(View):
         # build.expect(pexpect.EOF, timeout=120)
         #logging.info(str(build.before) + "\n" + str(build.after))
 
-        build = pexpect.spawn(os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
+        build = pexpect.spawn(os.path.join(app_directory, "build.sh") +
+                              os.path.join(app_directory, "gradlew") + " assemble%s"%mode,
                               cwd=app_directory)
         if mode == "Release":
             build.expect(".*Keystore password.*")
