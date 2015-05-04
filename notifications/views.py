@@ -410,11 +410,10 @@ class DownloadApplication(View):
         # build.expect(pexpect.EOF, timeout=120)
         #logging.info(str(build.before) + "\n" + str(build.after))
 
-        out = pexpect.run("python " + " ".join([
-                                os.path.join(app_directory, "build.py"),
+        out = pexpect.run(" ".join([
+                                os.path.join(app_directory, "build.sh"),
                                 os.path.join(app_directory, "gradlew"),
-                                mode,
-                                app_directory]),
+                                mode]),
                           cwd=app_directory,
                           events={
                               ".*Keystore password.*": app.key.keystore_password if app.key is not None else "",
