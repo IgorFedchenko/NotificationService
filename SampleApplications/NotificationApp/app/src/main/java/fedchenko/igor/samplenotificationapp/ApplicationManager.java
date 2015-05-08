@@ -19,6 +19,9 @@ public class ApplicationManager extends Application {
         Parse.initialize(this, "DUMkDMglUrCy4hmjQtMbMwGN9bwhM5avgW9FQOgW", "k2SihBOM0KH9iGBknFXDX19x9kXaiKjjoGACymiq");
 
         ParseInstallation.getCurrentInstallation().put("appID", "SOME_HASH");
-        ParseInstallation.getCurrentInstallation().saveInBackground();
+        try{
+            ParseInstallation.getCurrentInstallation().saveInBackground();
+        }
+        catch (Exception ex){ }
     }
 }
