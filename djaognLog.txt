@@ -1,0 +1,898 @@
+
+2015-05-04 02:53:01,820 INFO Inserting image...
+2015-05-04 02:53:01,823 INFO Inserting application ID
+2015-05-04 02:53:01,824 INFO Building...
+2015-05-04 02:53:03,025 INFO [Mon May 04 02:53:01.829339 2015] [:warn] [pid 14860] mod_wsgi (pid=14860): Callback registration for signal 1 ignored.
+[Mon May 04 02:53:01.831126 2015] [:warn] [pid 14860]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/wsgi.py", line 187, in __call__
+[Mon May 04 02:53:01.831143 2015] [:warn] [pid 14860]     response = self.get_response(request)
+[Mon May 04 02:53:01.831156 2015] [:warn] [pid 14860]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+[Mon May 04 02:53:01.831162 2015] [:warn] [pid 14860]     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+[Mon May 04 02:53:01.831168 2015] [:warn] [pid 14860]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+[Mon May 04 02:53:01.831174 2015] [:warn] [pid 14860]     return self.dispatch(request, *args, **kwargs)
+[Mon May 04 02:53:01.831180 2015] [:warn] [pid 14860]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+[Mon May 04 02:53:01.831185 2015] [:warn] [pid 14860]     return handler(request, *args, **kwargs)
+[Mon May 04 02:53:01.831191 2015] [:warn] [pid 14860]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+[Mon May 04 02:53:01.831196 2015] [:warn] [pid 14860]     return bound_func(*args, **kwargs)
+[Mon May 04 02:53:01.831207 2015] [:warn] [pid 14860]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+[Mon May 04 02:53:01.831213 2015] [:warn] [pid 14860]     return view_func(request, *args, **kwargs)
+[Mon May 04 02:53:01.831219 2015] [:warn] [pid 14860]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+[Mon May 04 02:53:01.831225 2015] [:warn] [pid 14860]     return func.__get__(self, type(self))(*args2, **kwargs2)
+[Mon May 04 02:53:01.831231 2015] [:warn] [pid 14860]   File "/home/igor/univercity/NotificationService/notifications/views.py", line 426, in post
+[Mon May 04 02:53:01.831236 2015] [:warn] [pid 14860]     path_to_apk = self.build_app(request.user, models.MobileApp.objects.get(pk=pk))
+[Mon May 04 02:53:01.831241 2015] [:warn] [pid 14860]   File "/home/igor/univercity/NotificationService/notifications/views.py", line 417, in build_app
+[Mon May 04 02:53:01.831246 2015] [:warn] [pid 14860]     ".*Key password.*": app.key.key_password if app.key is not None else ""
+[Mon May 04 02:53:01.831252 2015] [:warn] [pid 14860]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 214, in run
+[Mon May 04 02:53:01.831257 2015] [:warn] [pid 14860]     env=env, _spawn=spawn)
+[Mon May 04 02:53:01.831263 2015] [:warn] [pid 14860]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 231, in _run
+[Mon May 04 02:53:01.831268 2015] [:warn] [pid 14860]     **kwargs)
+[Mon May 04 02:53:01.831273 2015] [:warn] [pid 14860]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 511, in __init__
+[Mon May 04 02:53:01.831279 2015] [:warn] [pid 14860]     self._spawn(command, args)
+[Mon May 04 02:53:01.831284 2015] [:warn] [pid 14860]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 663, in _spawn
+[Mon May 04 02:53:01.831289 2015] [:warn] [pid 14860]     signal.signal(signal.SIGHUP, signal.SIG_IGN)
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Could not open terminal for stdout: $TERM not set
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+
+2015-05-04 02:53:03,025 INFO Build finished!
+2015-05-04 02:53:03,026 ERROR [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 430, in post
+    shutil.move(path_to_apk, os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash))
+  File "/usr/lib/python2.7/shutil.py", line 302, in move
+    copy2(src, real_dst)
+  File "/usr/lib/python2.7/shutil.py", line 130, in copy2
+    copyfile(src, dst)
+  File "/usr/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+2015-05-04 02:55:36,378 INFO Inserting image...
+2015-05-04 02:55:36,380 INFO Inserting application ID
+2015-05-04 02:55:36,380 INFO Building...
+2015-05-04 02:55:37,255 INFO [Mon May 04 02:55:36.385561 2015] [:warn] [pid 15028] mod_wsgi (pid=15028): Callback registration for signal 1 ignored.
+[Mon May 04 02:55:36.387218 2015] [:warn] [pid 15028]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/wsgi.py", line 187, in __call__
+[Mon May 04 02:55:36.387233 2015] [:warn] [pid 15028]     response = self.get_response(request)
+[Mon May 04 02:55:36.387246 2015] [:warn] [pid 15028]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+[Mon May 04 02:55:36.387252 2015] [:warn] [pid 15028]     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+[Mon May 04 02:55:36.387258 2015] [:warn] [pid 15028]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+[Mon May 04 02:55:36.387264 2015] [:warn] [pid 15028]     return self.dispatch(request, *args, **kwargs)
+[Mon May 04 02:55:36.387270 2015] [:warn] [pid 15028]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+[Mon May 04 02:55:36.387275 2015] [:warn] [pid 15028]     return handler(request, *args, **kwargs)
+[Mon May 04 02:55:36.387281 2015] [:warn] [pid 15028]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+[Mon May 04 02:55:36.387286 2015] [:warn] [pid 15028]     return bound_func(*args, **kwargs)
+[Mon May 04 02:55:36.387292 2015] [:warn] [pid 15028]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+[Mon May 04 02:55:36.387297 2015] [:warn] [pid 15028]     return view_func(request, *args, **kwargs)
+[Mon May 04 02:55:36.387303 2015] [:warn] [pid 15028]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+[Mon May 04 02:55:36.387308 2015] [:warn] [pid 15028]     return func.__get__(self, type(self))(*args2, **kwargs2)
+[Mon May 04 02:55:36.387314 2015] [:warn] [pid 15028]   File "/home/igor/univercity/NotificationService/notifications/views.py", line 427, in post
+[Mon May 04 02:55:36.387319 2015] [:warn] [pid 15028]     path_to_apk = self.build_app(request.user, models.MobileApp.objects.get(pk=pk))
+[Mon May 04 02:55:36.387325 2015] [:warn] [pid 15028]   File "/home/igor/univercity/NotificationService/notifications/views.py", line 419, in build_app
+[Mon May 04 02:55:36.387330 2015] [:warn] [pid 15028]     env={"TERM": "-dumb"})
+[Mon May 04 02:55:36.387335 2015] [:warn] [pid 15028]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 214, in run
+[Mon May 04 02:55:36.387340 2015] [:warn] [pid 15028]     env=env, _spawn=spawn)
+[Mon May 04 02:55:36.387346 2015] [:warn] [pid 15028]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 231, in _run
+[Mon May 04 02:55:36.387351 2015] [:warn] [pid 15028]     **kwargs)
+[Mon May 04 02:55:36.387356 2015] [:warn] [pid 15028]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 511, in __init__
+[Mon May 04 02:55:36.387361 2015] [:warn] [pid 15028]     self._spawn(command, args)
+[Mon May 04 02:55:36.387367 2015] [:warn] [pid 15028]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 663, in _spawn
+[Mon May 04 02:55:36.387372 2015] [:warn] [pid 15028]     signal.signal(signal.SIGHUP, signal.SIG_IGN)
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Could not open terminal for stdout: could not get termcap entry
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+
+2015-05-04 02:55:37,256 INFO Build finished!
+2015-05-04 02:55:37,256 ERROR [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 431, in post
+    shutil.move(path_to_apk, os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash))
+  File "/usr/lib/python2.7/shutil.py", line 302, in move
+    copy2(src, real_dst)
+  File "/usr/lib/python2.7/shutil.py", line 130, in copy2
+    copyfile(src, dst)
+  File "/usr/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+2015-05-04 02:59:05,030 INFO Inserting image...
+2015-05-04 02:59:05,032 INFO Inserting application ID
+2015-05-04 02:59:05,032 INFO Building...
+2015-05-04 02:59:06,172 INFO [Mon May 04 02:59:05.039121 2015] [:warn] [pid 15207] mod_wsgi (pid=15207): Callback registration for signal 1 ignored.
+[Mon May 04 02:59:05.042065 2015] [:warn] [pid 15207]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/wsgi.py", line 187, in __call__
+[Mon May 04 02:59:05.042091 2015] [:warn] [pid 15207]     response = self.get_response(request)
+[Mon May 04 02:59:05.042113 2015] [:warn] [pid 15207]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+[Mon May 04 02:59:05.042124 2015] [:warn] [pid 15207]     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+[Mon May 04 02:59:05.042137 2015] [:warn] [pid 15207]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+[Mon May 04 02:59:05.042146 2015] [:warn] [pid 15207]     return self.dispatch(request, *args, **kwargs)
+[Mon May 04 02:59:05.042157 2015] [:warn] [pid 15207]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+[Mon May 04 02:59:05.042166 2015] [:warn] [pid 15207]     return handler(request, *args, **kwargs)
+[Mon May 04 02:59:05.042178 2015] [:warn] [pid 15207]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+[Mon May 04 02:59:05.042187 2015] [:warn] [pid 15207]     return bound_func(*args, **kwargs)
+[Mon May 04 02:59:05.042199 2015] [:warn] [pid 15207]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+[Mon May 04 02:59:05.042209 2015] [:warn] [pid 15207]     return view_func(request, *args, **kwargs)
+[Mon May 04 02:59:05.042220 2015] [:warn] [pid 15207]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+[Mon May 04 02:59:05.042230 2015] [:warn] [pid 15207]     return func.__get__(self, type(self))(*args2, **kwargs2)
+[Mon May 04 02:59:05.042241 2015] [:warn] [pid 15207]   File "/home/igor/univercity/NotificationService/notifications/views.py", line 430, in post
+[Mon May 04 02:59:05.042250 2015] [:warn] [pid 15207]     path_to_apk = self.build_app(request.user, models.MobileApp.objects.get(pk=pk))
+[Mon May 04 02:59:05.042261 2015] [:warn] [pid 15207]   File "/home/igor/univercity/NotificationService/notifications/views.py", line 421, in build_app
+[Mon May 04 02:59:05.042270 2015] [:warn] [pid 15207]     ".*Key password.*": app.key.key_password if app.key is not None else ""
+[Mon May 04 02:59:05.042280 2015] [:warn] [pid 15207]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 214, in run
+[Mon May 04 02:59:05.042290 2015] [:warn] [pid 15207]     env=env, _spawn=spawn)
+[Mon May 04 02:59:05.042301 2015] [:warn] [pid 15207]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 231, in _run
+[Mon May 04 02:59:05.042310 2015] [:warn] [pid 15207]     **kwargs)
+[Mon May 04 02:59:05.042319 2015] [:warn] [pid 15207]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 511, in __init__
+[Mon May 04 02:59:05.042329 2015] [:warn] [pid 15207]     self._spawn(command, args)
+[Mon May 04 02:59:05.042339 2015] [:warn] [pid 15207]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 663, in _spawn
+[Mon May 04 02:59:05.042348 2015] [:warn] [pid 15207]     signal.signal(signal.SIGHUP, signal.SIG_IGN)
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Could not open terminal for stdout: $TERM not set
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+
+2015-05-04 02:59:06,172 INFO Build finished!
+2015-05-04 02:59:06,172 ERROR [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 434, in post
+    shutil.move(path_to_apk, os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash))
+  File "/usr/lib/python2.7/shutil.py", line 302, in move
+    copy2(src, real_dst)
+  File "/usr/lib/python2.7/shutil.py", line 130, in copy2
+    copyfile(src, dst)
+  File "/usr/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+2015-05-04 03:01:49,378 INFO Inserting image...
+2015-05-04 03:01:49,381 INFO Inserting application ID
+2015-05-04 03:01:49,382 INFO Building...
+2015-05-04 03:02:19,604 INFO [Mon May 04 03:01:49.389677 2015] [:warn] [pid 15370] mod_wsgi (pid=15370): Callback registration for signal 1 ignored.
+[Mon May 04 03:01:49.392371 2015] [:warn] [pid 15370]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/wsgi.py", line 187, in __call__
+[Mon May 04 03:01:49.392393 2015] [:warn] [pid 15370]     response = self.get_response(request)
+[Mon May 04 03:01:49.392411 2015] [:warn] [pid 15370]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+[Mon May 04 03:01:49.392420 2015] [:warn] [pid 15370]     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+[Mon May 04 03:01:49.392430 2015] [:warn] [pid 15370]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+[Mon May 04 03:01:49.392439 2015] [:warn] [pid 15370]     return self.dispatch(request, *args, **kwargs)
+[Mon May 04 03:01:49.392448 2015] [:warn] [pid 15370]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+[Mon May 04 03:01:49.392456 2015] [:warn] [pid 15370]     return handler(request, *args, **kwargs)
+[Mon May 04 03:01:49.392465 2015] [:warn] [pid 15370]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+[Mon May 04 03:01:49.392473 2015] [:warn] [pid 15370]     return bound_func(*args, **kwargs)
+[Mon May 04 03:01:49.392483 2015] [:warn] [pid 15370]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+[Mon May 04 03:01:49.392547 2015] [:warn] [pid 15370]     return view_func(request, *args, **kwargs)
+[Mon May 04 03:01:49.392559 2015] [:warn] [pid 15370]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+[Mon May 04 03:01:49.392568 2015] [:warn] [pid 15370]     return func.__get__(self, type(self))(*args2, **kwargs2)
+[Mon May 04 03:01:49.392577 2015] [:warn] [pid 15370]   File "/home/igor/univercity/NotificationService/notifications/views.py", line 429, in post
+[Mon May 04 03:01:49.392585 2015] [:warn] [pid 15370]     path_to_apk = self.build_app(request.user, models.MobileApp.objects.get(pk=pk))
+[Mon May 04 03:01:49.392594 2015] [:warn] [pid 15370]   File "/home/igor/univercity/NotificationService/notifications/views.py", line 420, in build_app
+[Mon May 04 03:01:49.392602 2015] [:warn] [pid 15370]     ".*Key password.*": app.key.key_password if app.key is not None else ""
+[Mon May 04 03:01:49.392611 2015] [:warn] [pid 15370]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 214, in run
+[Mon May 04 03:01:49.392619 2015] [:warn] [pid 15370]     env=env, _spawn=spawn)
+[Mon May 04 03:01:49.392628 2015] [:warn] [pid 15370]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 231, in _run
+[Mon May 04 03:01:49.392637 2015] [:warn] [pid 15370]     **kwargs)
+[Mon May 04 03:01:49.392645 2015] [:warn] [pid 15370]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 511, in __init__
+[Mon May 04 03:01:49.392653 2015] [:warn] [pid 15370]     self._spawn(command, args)
+[Mon May 04 03:01:49.392662 2015] [:warn] [pid 15370]   File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 663, in _spawn
+[Mon May 04 03:01:49.392671 2015] [:warn] [pid 15370]     signal.signal(signal.SIGHUP, signal.SIG_IGN)
+[Mon May 04 03:01:49.411591 2015] [:error] [pid 15370] Traceback (most recent call last):
+[Mon May 04 03:01:49.411624 2015] [:error] [pid 15370]   File "/usr/lib/python2.7/logging/__init__.py", line 875, in emit
+[Mon May 04 03:01:49.435064 2015] [:error] [pid 15370]     self.flush()
+[Mon May 04 03:01:49.435094 2015] [:error] [pid 15370]   File "/usr/lib/python2.7/logging/__init__.py", line 835, in flush
+[Mon May 04 03:01:49.435122 2015] [:error] [pid 15370]     self.stream.flush()
+[Mon May 04 03:01:49.435146 2015] [:error] [pid 15370] IOError: [Errno 9] Bad file descriptor
+[Mon May 04 03:01:49.435154 2015] [:error] [pid 15370] Logged from file shortcuts.py, line 90
+[Mon May 04 03:01:49.507201 2015] [:error] [pid 15370] [remote 91.78.68.215:52117] mod_wsgi (pid=15370): Exception occurred processing WSGI script '/home/igor/univercity/NotificationService/NotificationService/apache/wsgi.py'.
+[Mon May 04 03:01:49.507255 2015] [:error] [pid 15370] [remote 91.78.68.215:52117] IOError: failed to write data
+
+2015-05-04 03:02:19,605 INFO Build finished!
+2015-05-04 03:02:19,605 ERROR [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 433, in post
+    shutil.move(path_to_apk, os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash))
+  File "/usr/lib/python2.7/shutil.py", line 302, in move
+    copy2(src, real_dst)
+  File "/usr/lib/python2.7/shutil.py", line 130, in copy2
+    copyfile(src, dst)
+  File "/usr/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+2015-05-04 03:06:56,688 INFO Inserting image...
+2015-05-04 03:06:56,691 INFO Inserting application ID
+2015-05-04 03:06:56,692 INFO Building...
+2015-05-04 03:08:56,796 ERROR Timeout exceeded.
+<pexpect.spawn object at 0x7fa8172fd410>
+version: 3.3
+command: /home/igor/univercity/NotificationService/SampleApplications/1/build.sh
+args: ['/home/igor/univercity/NotificationService/SampleApplications/1/build.sh', '/home/igor/univercity/NotificationService/SampleApplications/1/gradlew', 'Debug']
+searcher: <pexpect.searcher_re object at 0x7fa8172fd890>
+buffer (last 100 chars): '3:06:56.846527 2015] [:error] [pid 15554] [remote 91.78.68.215:8250] IOError: failed to write data\r\n'
+before (last 100 chars): '3:06:56.846527 2015] [:error] [pid 15554] [remote 91.78.68.215:8250] IOError: failed to write data\r\n'
+after: <class 'pexpect.TIMEOUT'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: False
+pid: 15554
+child_fd: 17
+closed: False
+timeout: 30
+delimiter: <class 'pexpect.EOF'>
+logfile: None
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 431, in post
+    path_to_apk = self.build_app(request.user, models.MobileApp.objects.get(pk=pk))
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 423, in build_app
+    build.expect(pexpect.EOF, timeout=120)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 1451, in expect
+    timeout, searchwindowsize)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 1466, in expect_list
+    timeout, searchwindowsize)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 1568, in expect_loop
+    raise TIMEOUT(str(err) + '\n' + str(self))
+TIMEOUT: Timeout exceeded.
+<pexpect.spawn object at 0x7fa8172fd410>
+version: 3.3
+command: /home/igor/univercity/NotificationService/SampleApplications/1/build.sh
+args: ['/home/igor/univercity/NotificationService/SampleApplications/1/build.sh', '/home/igor/univercity/NotificationService/SampleApplications/1/gradlew', 'Debug']
+searcher: <pexpect.searcher_re object at 0x7fa8172fd890>
+buffer (last 100 chars): '3:06:56.846527 2015] [:error] [pid 15554] [remote 91.78.68.215:8250] IOError: failed to write data\r\n'
+before (last 100 chars): '3:06:56.846527 2015] [:error] [pid 15554] [remote 91.78.68.215:8250] IOError: failed to write data\r\n'
+after: <class 'pexpect.TIMEOUT'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: False
+pid: 15554
+child_fd: 17
+closed: False
+timeout: 30
+delimiter: <class 'pexpect.EOF'>
+logfile: None
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+2015-05-04 03:12:57,338 INFO Inserting image...
+2015-05-04 03:12:57,347 INFO Inserting application ID
+2015-05-04 03:12:57,348 INFO Building...
+2015-05-04 03:12:57,352 INFO Build finished!
+2015-05-04 03:12:57,458 ERROR [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 435, in post
+    shutil.move(path_to_apk, os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash))
+  File "/usr/lib/python2.7/shutil.py", line 302, in move
+    copy2(src, real_dst)
+  File "/usr/lib/python2.7/shutil.py", line 130, in copy2
+    copyfile(src, dst)
+  File "/usr/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+2015-05-04 03:14:14,846 INFO Inserting image...
+2015-05-04 03:14:14,848 INFO Inserting application ID
+2015-05-04 03:14:14,849 INFO Building...
+2015-05-04 03:22:12,137 INFO Inserting image...
+2015-05-04 03:22:12,140 INFO Inserting application ID
+2015-05-04 03:22:12,140 INFO Building...
+2015-05-04 03:22:12,141 ERROR The command was not found or was not executable: /home/igor/univercity/NotificationService/SampleApplications/1/gradlewassembleDebug.
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 429, in post
+    path_to_apk = self.build_app(request.user, models.MobileApp.objects.get(pk=pk))
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 414, in build_app
+    cwd=app_directory)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 511, in __init__
+    self._spawn(command, args)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/pexpect/__init__.py", line 616, in _spawn
+    'executable: %s.' % self.command)
+ExceptionPexpect: The command was not found or was not executable: /home/igor/univercity/NotificationService/SampleApplications/1/gradlewassembleDebug.
+2015-05-04 03:22:43,980 INFO Inserting image...
+2015-05-04 03:22:43,983 INFO Inserting application ID
+2015-05-04 03:22:43,983 INFO Building...
+2015-05-04 03:22:45,623 INFO Build finished!
+2015-05-04 03:22:45,762 ERROR [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 433, in post
+    shutil.move(path_to_apk, os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash))
+  File "/usr/lib/python2.7/shutil.py", line 302, in move
+    copy2(src, real_dst)
+  File "/usr/lib/python2.7/shutil.py", line 130, in copy2
+    copyfile(src, dst)
+  File "/usr/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+2015-05-05 01:43:35,540 INFO Inserting image...
+2015-05-05 01:43:35,549 INFO Inserting application ID
+2015-05-05 01:43:35,551 INFO Building...
+2015-05-05 01:43:38,755 INFO Build finished!
+2015-05-05 01:43:38,870 ERROR [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 433, in post
+    shutil.move(path_to_apk, os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash))
+  File "/usr/lib/python2.7/shutil.py", line 302, in move
+    copy2(src, real_dst)
+  File "/usr/lib/python2.7/shutil.py", line 130, in copy2
+    copyfile(src, dst)
+  File "/usr/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+2015-05-05 01:46:15,112 INFO Inserting image...
+2015-05-05 01:46:15,116 INFO Inserting application ID
+2015-05-05 01:46:15,117 INFO Building...
+2015-05-05 01:48:15,220 INFO Build finished!
+2015-05-05 01:48:15,327 ERROR [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 434, in post
+    shutil.move(path_to_apk, os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash))
+  File "/usr/lib/python2.7/shutil.py", line 302, in move
+    copy2(src, real_dst)
+  File "/usr/lib/python2.7/shutil.py", line 130, in copy2
+    copyfile(src, dst)
+  File "/usr/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+2015-05-05 01:52:22,401 INFO Inserting image...
+2015-05-05 01:52:22,404 INFO Inserting application ID
+2015-05-05 01:52:22,405 INFO Building...
+2015-05-05 01:54:22,507 INFO Build finished!
+2015-05-05 01:54:22,612 ERROR [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 434, in post
+    os.makedirs(os.path.join(MEDIA_ROOT, "media/apps_to_download"))
+  File "/usr/lib/python2.7/shutil.py", line 302, in move
+    copy2(src, real_dst)
+  File "/usr/lib/python2.7/shutil.py", line 130, in copy2
+    copyfile(src, dst)
+  File "/usr/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+2015-05-05 02:01:17,256 INFO Inserting image...
+2015-05-05 02:01:17,258 INFO Inserting application ID
+2015-05-05 02:01:17,326 INFO Building...
+2015-05-05 02:02:11,829 INFO 1
+2015-05-05 02:02:11,829 INFO Build finished!
+2015-05-05 02:02:11,830 ERROR [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 444, in post
+    shutil.move(path_to_apk, os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash))
+  File "/usr/lib/python2.7/shutil.py", line 302, in move
+    copy2(src, real_dst)
+  File "/usr/lib/python2.7/shutil.py", line 130, in copy2
+    copyfile(src, dst)
+  File "/usr/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+2015-05-05 02:04:03,375 INFO Inserting image...
+2015-05-05 02:04:03,378 INFO Inserting application ID
+2015-05-05 02:04:03,379 INFO Building...
+2015-05-05 02:04:29,997 ERROR cannot concatenate 'str' and 'int' objects
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 440, in post
+    path_to_apk = self.build_app(request.user, models.MobileApp.objects.get(pk=pk))
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 431, in build_app
+    logging.info("Ret code:" + ex.returncode + "\nOutput: " + ex.output)
+TypeError: cannot concatenate 'str' and 'int' objects
+2015-05-05 02:05:21,784 INFO Inserting image...
+2015-05-05 02:05:21,786 INFO Inserting application ID
+2015-05-05 02:05:22,131 INFO Building...
+2015-05-05 02:05:47,843 INFO Ret code:1
+Output: :app:preBuild
+:app:compileDebugNdk
+:app:preDebugBuild
+:app:checkDebugManifest
+:app:prepareDebugDependencies
+:app:compileDebugAidl
+:app:compileDebugRenderscript
+:app:generateDebugBuildConfig
+:app:generateDebugAssets UP-TO-DATE
+:app:mergeDebugAssets
+:app:generateDebugResValues
+:app:generateDebugResources
+:app:mergeDebugResources
+:app:processDebugManifest
+:app:processDebugResources
+:app:generateDebugSources
+:app:compileDebugJava FAILED
+
+BUILD FAILED
+
+Total time: 23.828 secs
+
+2015-05-05 02:05:47,843 INFO Build finished!
+2015-05-05 02:05:47,843 ERROR [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 444, in post
+    shutil.move(path_to_apk, os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash))
+  File "/usr/lib/python2.7/shutil.py", line 302, in move
+    copy2(src, real_dst)
+  File "/usr/lib/python2.7/shutil.py", line 130, in copy2
+    copyfile(src, dst)
+  File "/usr/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-debug.apk'
+2015-05-05 02:15:07,618 INFO Inserting image...
+2015-05-05 02:15:07,621 INFO Inserting application ID
+2015-05-05 02:15:07,824 INFO Building...
+2015-05-05 02:16:19,215 INFO :app:preBuild
+:app:compileDebugNdk
+:app:preDebugBuild
+:app:checkDebugManifest
+:app:prepareDebugDependencies
+:app:compileDebugAidl
+:app:compileDebugRenderscript
+:app:generateDebugBuildConfig
+:app:generateDebugAssets UP-TO-DATE
+:app:mergeDebugAssets
+:app:generateDebugResValues
+:app:generateDebugResources
+:app:mergeDebugResources
+:app:processDebugManifest
+:app:processDebugResources
+:app:generateDebugSources
+:app:compileDebugJava
+:app:preDexDebug
+:app:dexDebug
+:app:processDebugJavaRes UP-TO-DATE
+:app:validateDebugSigning
+:app:packageDebug
+:app:zipalignDebug
+:app:assembleDebug
+
+BUILD SUCCESSFUL
+
+Total time: 1 mins 10.92 secs
+
+2015-05-05 02:16:19,215 INFO Build finished!
+2015-05-05 02:27:16,570 INFO Inserting image...
+2015-05-05 02:27:16,573 INFO Inserting application ID
+2015-05-05 02:27:17,837 INFO Building...
+2015-05-05 02:27:58,114 INFO Ret code:1
+Output: :app:preBuild
+:app:preReleaseBuild
+:app:checkReleaseManifest
+:app:prepareReleaseDependencies
+:app:compileReleaseAidl
+:app:compileReleaseRenderscript
+:app:generateReleaseBuildConfig
+:app:generateReleaseAssets UP-TO-DATE
+:app:mergeReleaseAssets
+:app:generateReleaseResValues
+:app:generateReleaseResources
+:app:mergeReleaseResources
+:app:processReleaseManifest
+:app:processReleaseResources
+:app:generateReleaseSources
+:app:compileReleaseJava
+:app:lintVitalRelease
+:app:askForPasswords FAILED
+
+BUILD FAILED
+
+Total time: 39.76 secs
+
+2015-05-05 02:27:58,114 INFO Build finished!
+2015-05-05 02:27:58,115 ERROR [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-release.apk'
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 445, in post
+    shutil.move(path_to_apk, os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash))
+  File "/usr/lib/python2.7/shutil.py", line 302, in move
+    copy2(src, real_dst)
+  File "/usr/lib/python2.7/shutil.py", line 130, in copy2
+    copyfile(src, dst)
+  File "/usr/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/1/app/build/outputs/apk/app-release.apk'
+2015-05-05 02:48:00,654 INFO Inserting image...
+2015-05-05 02:48:00,656 INFO Inserting application ID
+2015-05-05 02:48:00,659 ERROR 'ascii' codec can't decode byte 0xd1 in position 402: ordinal not in range(128)
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 422, in post
+    path_to_apk = self.build_app(request.user, models.MobileApp.objects.get(pk=pk))
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 403, in build_app
+    f.write(data.replace(r'new String(System.console().readPassword("Keystore password: "))', "\"%s\""%app.key.keystore_password)
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xd1 in position 402: ordinal not in range(128)
+2015-05-05 02:50:46,564 INFO Inserting image...
+2015-05-05 02:50:46,566 INFO Inserting application ID
+2015-05-05 02:50:46,569 INFO Building...
+2015-05-05 02:52:02,630 INFO :app:preBuild
+:app:preReleaseBuild
+:app:checkReleaseManifest
+:app:prepareReleaseDependencies
+:app:compileReleaseAidl
+:app:compileReleaseRenderscript
+:app:generateReleaseBuildConfig
+:app:generateReleaseAssets UP-TO-DATE
+:app:mergeReleaseAssets
+:app:generateReleaseResValues
+:app:generateReleaseResources
+:app:mergeReleaseResources
+:app:processReleaseManifest
+:app:processReleaseResources
+:app:generateReleaseSources
+:app:compileReleaseJava
+:app:lintVitalRelease
+:app:askForPasswords
+:app:compileReleaseNdk
+:app:preDexRelease
+:app:dexRelease
+:app:processReleaseJavaRes UP-TO-DATE
+:app:validateReleaseSigning
+:app:packageRelease
+:app:zipalignRelease
+:app:assembleRelease
+
+BUILD SUCCESSFUL
+
+Total time: 1 mins 15.582 secs
+
+2015-05-05 02:52:02,630 INFO Build finished!
+2015-05-05 11:45:57,889 INFO Inserting image...
+2015-05-05 11:45:57,899 INFO Inserting application ID
+2015-05-05 11:45:57,900 INFO Building...
+2015-05-05 11:47:23,746 INFO :app:preBuild
+:app:compileDebugNdk
+:app:preDebugBuild
+:app:checkDebugManifest
+:app:prepareDebugDependencies
+:app:compileDebugAidl
+:app:compileDebugRenderscript
+:app:generateDebugBuildConfig
+:app:generateDebugAssets UP-TO-DATE
+:app:mergeDebugAssets
+:app:generateDebugResValues
+:app:generateDebugResources
+:app:mergeDebugResources
+:app:processDebugManifest
+:app:processDebugResources
+:app:generateDebugSources
+:app:compileDebugJava
+:app:preDexDebug
+:app:dexDebug
+:app:processDebugJavaRes UP-TO-DATE
+:app:validateDebugSigning
+:app:packageDebug
+:app:zipalignDebug
+:app:assembleDebug
+
+BUILD SUCCESSFUL
+
+Total time: 1 mins 25.187 secs
+
+2015-05-05 11:47:23,746 INFO Build finished!
+2015-05-05 11:51:36,215 INFO Inserting image...
+2015-05-05 11:51:36,218 INFO Inserting application ID
+2015-05-05 11:51:38,985 INFO Building...
+2015-05-05 11:53:02,950 INFO Ret code:1
+Output: :app:preBuild
+:app:preReleaseBuild
+:app:checkReleaseManifest
+:app:prepareReleaseDependencies
+:app:compileReleaseAidl
+:app:compileReleaseRenderscript
+:app:generateReleaseBuildConfig
+:app:generateReleaseAssets UP-TO-DATE
+:app:mergeReleaseAssets
+:app:generateReleaseResValues
+:app:generateReleaseResources
+:app:mergeReleaseResources
+:app:processReleaseManifest
+:app:processReleaseResources
+:app:generateReleaseSources
+:app:compileReleaseJava
+:app:lintVitalRelease
+:app:askForPasswords
+:app:compileReleaseNdk
+:app:preDexRelease
+:app:dexRelease
+:app:processReleaseJavaRes UP-TO-DATE
+:app:validateReleaseSigning
+:app:packageRelease FAILED
+
+BUILD FAILED
+
+Total time: 1 mins 23.482 secs
+
+2015-05-05 11:53:02,957 INFO Build finished!
+2015-05-05 11:53:02,957 ERROR [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/2/app/build/outputs/apk/app-release.apk'
+Traceback (most recent call last):
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/views/generic/base.py", line 87, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 29, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/home/igor/univercity/NotificationService/venv/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/home/igor/univercity/NotificationService/notifications/views.py", line 425, in post
+    shutil.move(path_to_apk, os.path.join(MEDIA_ROOT, "media/apps_to_download/%s"%hash))
+  File "/usr/lib/python2.7/shutil.py", line 302, in move
+    copy2(src, real_dst)
+  File "/usr/lib/python2.7/shutil.py", line 130, in copy2
+    copyfile(src, dst)
+  File "/usr/lib/python2.7/shutil.py", line 82, in copyfile
+    with open(src, 'rb') as fsrc:
+IOError: [Errno 2] No such file or directory: '/home/igor/univercity/NotificationService/SampleApplications/2/app/build/outputs/apk/app-release.apk'
+2015-05-09 00:13:12,613 INFO Inserting image...
+2015-05-09 00:13:12,648 INFO Inserting application ID
+2015-05-09 00:13:12,657 INFO Building...
+2015-05-09 00:14:21,173 INFO :app:preBuild
+:app:preReleaseBuild
+:app:checkReleaseManifest
+:app:prepareReleaseDependencies
+:app:compileReleaseAidl
+:app:compileReleaseRenderscript
+:app:generateReleaseBuildConfig
+:app:generateReleaseAssets UP-TO-DATE
+:app:mergeReleaseAssets
+:app:generateReleaseResValues
+:app:generateReleaseResources
+:app:mergeReleaseResources
+:app:processReleaseManifest
+:app:processReleaseResources
+:app:generateReleaseSources
+:app:compileReleaseJava
+:app:lintVitalRelease
+:app:askForPasswords
+:app:compileReleaseNdk
+:app:preDexRelease
+:app:dexRelease
+:app:processReleaseJavaRes UP-TO-DATE
+:app:validateReleaseSigning
+:app:packageRelease
+:app:zipalignRelease
+:app:assembleRelease
+
+BUILD SUCCESSFUL
+
+Total time: 1 mins 7.264 secs
+
+2015-05-09 00:14:21,174 INFO Build finished!
+2015-05-11 09:33:25,038 INFO Inserting image...
+2015-05-11 09:33:25,057 INFO Inserting application ID
+2015-05-11 09:33:31,070 INFO Building...
+2015-05-11 09:35:18,668 INFO :app:preBuild
+:app:preReleaseBuild
+:app:checkReleaseManifest
+:app:prepareReleaseDependencies
+:app:compileReleaseAidl
+:app:compileReleaseRenderscript
+:app:generateReleaseBuildConfig
+:app:generateReleaseAssets UP-TO-DATE
+:app:mergeReleaseAssets
+:app:generateReleaseResValues
+:app:generateReleaseResources
+:app:mergeReleaseResources
+:app:processReleaseManifest
+:app:processReleaseResources
+:app:generateReleaseSources
+:app:compileReleaseJava
+:app:lintVitalRelease
+:app:askForPasswords
+:app:compileReleaseNdk
+:app:preDexRelease
+:app:dexRelease
+:app:processReleaseJavaRes UP-TO-DATE
+:app:validateReleaseSigning
+:app:packageRelease
+:app:zipalignRelease
+:app:assembleRelease
+
+BUILD SUCCESSFUL
+
+Total time: 1 mins 45.506 secs
+
+2015-05-11 09:35:18,687 INFO Build finished!

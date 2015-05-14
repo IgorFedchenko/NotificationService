@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+.popup_background {
+    background: #000; /* фон */
+    bottom: 0;  /* координата снизу */
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50); /* прозрачность для IE */
+    height: 100%; /* высота на всю страницу */
+    opacity: 0.5;  /* прозрачность слоя */
+    position: fixed; /* фиксируем элемент на странице*/
+    top: 0; /* координата сверху */
+    width: 100%; /* ширина на всю страницу */
+    z-index: 998; /* z-index для перекрытия остальных элементов */
+}
+
+.scroller{
+	overflow: scroll;
+}
+
+.popup_content{
+	background-color: white;
+	height: 50%;
+	width: 25%;
+	z-index: 999;
+	position: fixed;
+	text-align: center;
+	vertical-align: middle;
+}
