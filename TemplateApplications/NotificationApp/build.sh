@@ -1,0 +1,1 @@
+$1 $2 > /var/www/html/buildLog.txt
